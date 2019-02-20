@@ -3,10 +3,19 @@ import {Link} from 'react-router-dom';
 import {Upload, Icon, Button} from 'antd';
 import { Nav } from '../components/Nav';
 import { routes } from '../constants/routes';
+import { UploadChangeParam } from 'antd/lib/upload/interface';
 
 
 
 export class Hwrp extends React.Component<any, any> {
+    state = {
+        disabled: false,
+        data: {}
+    }
+
+    handleChange = (info: UploadChangeParam) => {
+            console.log(info.file);
+    }
 
 
     render() {
@@ -19,7 +28,7 @@ export class Hwrp extends React.Component<any, any> {
                     
                 </Nav>
                 <div style={{padding: 15, display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
-                    <Upload>
+                    <Upload onChange={this.handleChange} name="file" accept="*">
                     <Button type="primary">
                         <Icon type="upload" /> Click to Upload
                         </Button>
