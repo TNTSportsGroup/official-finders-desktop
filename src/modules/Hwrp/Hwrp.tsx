@@ -25,10 +25,10 @@ export class Hwrp extends React.Component<any, any> {
                     <Link to={routes.HOME}>
                     <Icon type="arrow-left" style={{color: 'white', marginLeft: '.5rem', fontSize: '1.5rem'}}/>
                     </Link>
-                    
+                
                 </Nav>
                 <div style={{padding: 15, display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
-                    <Upload onChange={this.handleChange} name="file" accept="*">
+                    <Upload onChange={this.handleChange} name="file" accept="*" action="http://localhost:3000/hwrp" multiple={false}>
                     <Button type="primary" disabled={this.state.disabled}>
                         <Icon type="upload" /> Click to Upload
                         </Button>
