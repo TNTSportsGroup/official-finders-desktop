@@ -1,14 +1,16 @@
 import * as React from 'react';
-import {Button} from 'antd';
+import {BrowserRouter as Router, Switch} from 'react-router-dom';
+import { Routes } from './modules/Routes';
 
 
 export class App extends React.Component<undefined, undefined> {
   render() {
     return (
-      <div>
-            <h2>Naniii</h2>
-        <Button type='primary'>Primary</Button>
-      </div>
-    );
+      <Router>
+        <Switch>
+          <Routes />
+        </Switch>
+      </Router>
+    )
   }
 }
