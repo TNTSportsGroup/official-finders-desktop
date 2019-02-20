@@ -67,7 +67,9 @@
     "babel-preset-react": "^6.24.1",
     "electron-forge": "^5.2.4",
     "electron-prebuilt-compile": "4.0.0",
+    "prettier": "^1.16.4",
     "tslint": "^5.12.1",
-    "typescript": "^2.2.2"
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.3.3"
   }
 }
