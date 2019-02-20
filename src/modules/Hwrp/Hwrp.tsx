@@ -29,7 +29,7 @@ export class Hwrp extends React.Component<any, any> {
                 </Nav>
                 <div style={{padding: 15, display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
                     <Upload onChange={this.handleChange} name="file" accept="*">
-                    <Button type="primary">
+                    <Button type="primary" disabled={this.state.disabled}>
                         <Icon type="upload" /> Click to Upload
                         </Button>
                     </Upload>
