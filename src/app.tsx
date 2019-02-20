@@ -1,6 +1,8 @@
 import * as React from 'react';
-import {BrowserRouter as Router, Switch} from 'react-router-dom';
+import {Switch, MemoryRouter as Router} from 'react-router-dom';
+
 import { Routes } from './modules/Routes';
+
 
 
 export class App extends React.Component<undefined, undefined> {
@@ -14,3 +16,4 @@ export class App extends React.Component<undefined, undefined> {
     )
   }
 }
+ 

@@ -1,4 +1,4 @@
 export const routes = {
-    HOME: "/",
-    HWRPAYROLL: "/hwrpayroll"
-  };
+  HOME: "/",
+  HWRPAYROLL: "/hwrpayroll"
+};
