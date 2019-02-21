@@ -13,7 +13,8 @@ export class Hwrp extends React.Component<any, any> {
         data: [],
         error: {},
         fileName: '',
-        negativeReport: []
+        negativeReport: [],
+        showNegativeReport: false
         
     }
 
@@ -73,6 +74,17 @@ export class Hwrp extends React.Component<any, any> {
                     <div>
                         <Table bordered={true} dataSource={this.state.data} columns={columns}/>
                     </div>
+                )}
+
+                {this.state.negativeReport.length >= 1 && (
+                    <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
+                        <Button>
+                        Show Report
+                    </Button>
+
+
+                    </div>
+                    
                 )}
             </div>
         )
