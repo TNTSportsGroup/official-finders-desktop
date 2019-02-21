@@ -69,7 +69,7 @@ export class Hwrp extends React.Component<any, any> {
 
                 {this.state.data.length >= 1 && (
                     <div>
-                        <Table dataSource={this.state.data} columns={columns}/>
+                        <Table bordered={true} dataSource={this.state.data} columns={columns}/>
                     </div>
                 )}
             </div>
