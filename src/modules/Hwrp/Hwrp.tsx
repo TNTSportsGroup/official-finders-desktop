@@ -13,6 +13,7 @@ export class Hwrp extends React.Component<any, any> {
         data: [],
         error: {},
         fileName: '',
+        negativeReport: []
         
     }
 
@@ -24,7 +25,8 @@ export class Hwrp extends React.Component<any, any> {
             
             this.setState({
                 fileName: response.fileName,
-                data: response.userData
+                data: response.userData,
+                negativeReport: response.negative 
 
             })
            
