@@ -52,6 +52,7 @@
     "@types/react-dom": "^0.14.23",
     "@types/styled-components": "^4.1.10",
     "antd": "^3.13.5",
+    "dayjs": "^1.8.6",
     "electron-compile": "^6.4.4",
     "electron-devtools-installer": "^2.2.4",
     "electron-squirrel-startup": "^1.0.0",
