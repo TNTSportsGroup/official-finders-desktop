@@ -1,8 +1,17 @@
 import * as React from 'react';
+import * as fs from 'fs';
+import * as dayjs from 'dayjs';
 import {Link} from 'react-router-dom';
 import {Upload, Icon, Button, Table} from 'antd';
+
+
 import { Nav } from '../components/Nav';
 import { routes } from '../constants/routes';
+import * as path from 'path';
+
+
+
+
 
 
 
@@ -44,8 +53,43 @@ export class Hwrp extends React.Component<any, any> {
     }
 
 
-    handleDownloadClick = () => {
+    handleDownloadClick = async() => {
+        const {fileName} = this.state;
+
+        let response = await fetch(`http://localhost:3000/hwrp/${fileName}`);
+
+       
+
+        if(response && response.body) {
+            if(response.status === 200) {
+                const res = await response.text()
+                const userDir = process.env.HOME || process.env.PWD
+                var DOWNLOAD_DIR = path.join(userDir as string, 'downloads/')
+                const formattedDate = dayjs().format('MMM-D-h-m')
+                const savedFileName = `payroll-${formattedDate}.csv`
+                
+
+                
+                const myWritableStream = fs.createWriteStream(DOWNLOAD_DIR + savedFileName)
+                myWritableStream.write(res);
+                
+            }
+        }
         
+
+        
+        
+
+        // DownloadManager.download({
+        //     url: `http://localhost:3000/hwrp/${fileName}`
+        // }, (error: any, info: any) => {
+        //     if(error) {
+        //         console.log(error);
+        //         return;
+        //     }
+
+        //     console.log("DONE: " + info.url)
+        // })
     }
 
     
@@ -92,7 +136,7 @@ export class Hwrp extends React.Component<any, any> {
                         <Button onClick={this.handleReportClick}>
                         Show Report
                     </Button>
-                    <Button type="primary">
+                    <Button type="primary" onClick={this.handleDownloadClick}>
                         Download
                         <Icon type="cloud-download"/>
 
