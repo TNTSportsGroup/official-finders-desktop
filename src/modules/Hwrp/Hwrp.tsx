@@ -43,6 +43,11 @@ export class Hwrp extends React.Component<any, any> {
         }))
     }
 
+
+    handleDownloadClick = () => {
+        
+    }
+
     
 
 
@@ -66,7 +71,7 @@ export class Hwrp extends React.Component<any, any> {
                     </Link>
                 
                 </Nav>
-                <div style={{padding: '5rem', display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
+                <div style={{padding: '5rem', display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
                     <Upload onChange={this.handleChange} name="file" accept="*" action="http://localhost:3000/hwrp" multiple={false}>
                     <Button type="primary" disabled={this.state.disabled}>
                         <Icon type="upload" /> Upload File
@@ -83,10 +88,17 @@ export class Hwrp extends React.Component<any, any> {
                 )}
 
                 {this.state.negativeReport.length >= 1 && (
-                    <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
+                    <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-around', padding: '1rem'}}>
                         <Button onClick={this.handleReportClick}>
                         Show Report
                     </Button>
+                    <Button type="primary">
+                        Download
+                        <Icon type="cloud-download"/>
+
+                        
+                    </Button>
+
 
 
                     </div>
