@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as fs from 'fs';
 import * as dayjs from 'dayjs';
 import {Link} from 'react-router-dom';
-import {Upload, Icon, Button, Table} from 'antd';
+import {Upload, Icon, Button, Table, Alert} from 'antd';
 
 
 import { Nav } from '../components/Nav';
@@ -20,10 +20,10 @@ export class Hwrp extends React.Component<any, any> {
     state = {
         disabled: false,
         data: [],
-        error: {},
         fileName: '',
         negativeReport: [],
-        showNegativeReport: false
+        showNegativeReport: false,
+        showSuccess: false
         
     }
 
@@ -71,7 +71,11 @@ export class Hwrp extends React.Component<any, any> {
 
                 
                 const myWritableStream = fs.createWriteStream(DOWNLOAD_DIR + savedFileName)
-                myWritableStream.write(res);
+                await myWritableStream.write(res);
+
+                await this.setState({
+                    showSuccess: true
+                })
                 
             }
         }
@@ -80,16 +84,7 @@ export class Hwrp extends React.Component<any, any> {
         
         
 
-        // DownloadManager.download({
-        //     url: `http://localhost:3000/hwrp/${fileName}`
-        // }, (error: any, info: any) => {
-        //     if(error) {
-        //         console.log(error);
-        //         return;
-        //     }
 
-        //     console.log("DONE: " + info.url)
-        // })
     }
 
     
@@ -143,6 +138,10 @@ export class Hwrp extends React.Component<any, any> {
                         
                     </Button>
 
+                    {this.state.showSuccess && (
+                        <Alert message="Download was a success" type="success" showIcon/>
+                    )}
+
 
 
                     </div>
@@ -156,6 +155,8 @@ export class Hwrp extends React.Component<any, any> {
                     </div>
                     )
                 }
+
+
             </div>
         )
     }
