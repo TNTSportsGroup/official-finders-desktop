@@ -77,7 +77,7 @@ export class Hwrp extends React.Component<any, any> {
                 </div>
 
                 {this.state.data.length >= 1 && (
-                    <div>
+                    <div style={{padding: '2rem'}}>
                         <Table bordered={true} dataSource={this.state.data} columns={columns}/>
                     </div>
                 )}
@@ -95,7 +95,7 @@ export class Hwrp extends React.Component<any, any> {
 
                 {
                     this.state.showNegativeReport && (
-                        <div>
+                        <div style={{padding: '2rem'}}>
                         <Table bordered={true} dataSource={this.state.negativeReport} columns={columns}/>
                     </div>
                     )
