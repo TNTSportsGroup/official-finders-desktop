@@ -6,7 +6,7 @@ import { Hwrp } from "./Hwrp/Hwrp";
 
 export const Routes = () => (
   <>
-    <Route exact path={routes.HWRPAYROLL} component={Hwrp} />
-    <Route exact path={routes.HOME} component={Home} />
+    <Route exac={true} path={routes.HWRPAYROLL} component={Hwrp} />
+    <Route exact={true} path={routes.HOME} component={Home} />
   </>
 );
