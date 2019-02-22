@@ -1,4 +1,4 @@
-import { app, BrowserWindow, Electron } from "electron";
+import { app, BrowserWindow } from "electron";
 import installExtension, {
   REACT_DEVELOPER_TOOLS
 } from "electron-devtools-installer";
@@ -38,6 +38,8 @@ const createWindow = async () => {
     mainWindow = null;
   });
 };
+
+// DownloadManager.register();
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
