@@ -37,6 +37,12 @@ export class Hwrp extends React.Component<any, any> {
             
     }
 
+    handleReportClick = () => {
+        this.setState((prevState) => ({
+            showNegativeReport: !prevState.showNegativeReport
+        }))
+    }
+
     
 
 
@@ -53,7 +59,7 @@ export class Hwrp extends React.Component<any, any> {
 
         
         return (
-            <div style={{ minHeight: '100vh', justifyContent: 'flex-start', flexDirection: 'column'}}>
+            <div style={{ height: '100%', width: '100%', justifyContent: 'flex-start', flexDirection: 'column', }}>
                 <Nav>
                     <Link to={routes.HOME}>
                     <Icon type="arrow-left" style={{color: 'white', marginLeft: '.5rem', fontSize: '1.5rem'}}/>
@@ -78,7 +84,7 @@ export class Hwrp extends React.Component<any, any> {
 
                 {this.state.negativeReport.length >= 1 && (
                     <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
-                        <Button>
+                        <Button onClick={this.handleReportClick}>
                         Show Report
                     </Button>
 
@@ -86,6 +92,14 @@ export class Hwrp extends React.Component<any, any> {
                     </div>
                     
                 )}
+
+                {
+                    this.state.showNegativeReport && (
+                        <div>
+                        <Table bordered={true} dataSource={this.state.negativeReport} columns={columns}/>
+                    </div>
+                    )
+                }
             </div>
         )
     }
