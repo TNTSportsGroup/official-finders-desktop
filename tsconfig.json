@@ -17,7 +17,7 @@
     "moduleResolution": "node",
     "pretty": true,
     "target": "es2015",
-    "jsx": "react"
+    "jsx": "preserve"
   },
   "formatCodeOptions": {
     "indentSize": 2,
