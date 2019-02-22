@@ -1,9 +1,7 @@
-import * as React from 'react';
-import {Switch, MemoryRouter as Router} from 'react-router-dom';
+import * as React from "react";
+import { Switch, MemoryRouter as Router } from "react-router-dom";
 
-import { Routes } from './modules/Routes';
-
-
+import { Routes } from "./modules/Routes";
 
 export class App extends React.Component<undefined, undefined> {
   render() {
@@ -13,7 +11,6 @@ export class App extends React.Component<undefined, undefined> {
           <Routes />
         </Switch>
       </Router>
-    )
+    );
   }
 }
- 
