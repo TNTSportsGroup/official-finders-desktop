@@ -73,14 +73,14 @@ export class Hwrp extends React.Component<any, IState> {
   render() {
     const columns = [
       {
-        title: "Name",
+        title: "Receiver Name",
         dataIndex: "name",
         key: "name"
       },
       {
-        title: "Payment",
-        dataIndex: "payment",
-        key: "payment"
+        title: "Amount",
+        dataIndex: "amount",
+        key: "amount"
       }
     ];
 
@@ -137,7 +137,7 @@ export class Hwrp extends React.Component<any, IState> {
           </div>
         )}
 
-        {this.state.negativeReport.length >= 1 && (
+        {this.state.data.length >= 1 && (
           <div
             style={{
               display: "flex",
