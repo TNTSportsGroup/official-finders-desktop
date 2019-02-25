@@ -39,13 +39,13 @@ export class Hwrp extends React.Component<any, any> {
   handleDownloadClick = async () => {
     const { fileName } = this.state;
 
-    let response = await fetch(`http://localhost:3000/hwrp/${fileName}`);
+    const response = await fetch(`http://localhost:3000/hwrp/${fileName}`);
 
     if (response && response.body) {
       if (response.status === 200) {
         const res = await response.text();
         const userDir = process.env.HOME || process.env.PWD;
-        var DOWNLOAD_DIR = path.join(userDir as string, "downloads/");
+        const DOWNLOAD_DIR = path.join(userDir as string, "downloads/");
         const formattedDate = dayjs().format("MMM-D-h-m");
         const savedFileName = `payroll-${formattedDate}.csv`;
 
