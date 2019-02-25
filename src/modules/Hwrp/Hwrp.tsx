@@ -8,7 +8,16 @@ import { Nav } from "../components/Nav";
 import { routes } from "../constants/routes";
 import * as path from "path";
 
-export class Hwrp extends React.Component<any, any> {
+interface IState {
+  disabled: boolean;
+  data: any[];
+  fileName: string;
+  negativeReport: any[];
+  showNegativeReport: boolean;
+  showSuccess: boolean;
+}
+
+export class Hwrp extends React.Component<any, IState> {
   state = {
     disabled: false,
     data: [],
@@ -31,7 +40,7 @@ export class Hwrp extends React.Component<any, any> {
   };
 
   handleReportClick = () => {
-    this.setState(prevState => ({
+    this.setState((prevState: IState) => ({
       showNegativeReport: !prevState.showNegativeReport
     }));
   };
