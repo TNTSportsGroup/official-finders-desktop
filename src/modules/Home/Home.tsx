@@ -36,7 +36,13 @@ export const Home = () => (
       <Header>Home</Header>
       <Link to={routes.HWRPAYROLL}>
         <Button type="primary">
-          HWRP
+          HWR Payroll
+          <Icon type="arrow-right" />
+        </Button>
+      </Link>
+      <Link to={routes.HWRPAYROLL}>
+        <Button type="primary">
+          HWR Invoice
           <Icon type="arrow-right" />
         </Button>
       </Link>
