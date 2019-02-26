@@ -2,9 +2,18 @@ import * as React from "react";
 import { Nav } from "../components/Nav";
 import { Link } from "react-router-dom";
 import { routes } from "../constants/routes";
-import { Icon } from "antd";
+import { Icon, Upload, Button } from "antd";
+import console = require("console");
 
 export class HwrInvoice extends React.Component {
+  state = {
+    disabled: false
+  };
+
+  handleChange = () => {
+    console.log("changed");
+  };
+
   render() {
     return (
       <div
@@ -27,6 +36,28 @@ export class HwrInvoice extends React.Component {
             />
           </Link>
         </Nav>
+
+        <div
+          style={{
+            padding: "5rem",
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          <Upload
+            onChange={this.handleChange}
+            name="file"
+            accept="*"
+            action="http://localhost:3000/hwrp"
+            multiple={false}
+          >
+            <Button type="primary" disabled={this.state.disabled}>
+              <Icon type="upload" /> Upload Invoice
+            </Button>
+          </Upload>
+        </div>
       </div>
     );
   }
