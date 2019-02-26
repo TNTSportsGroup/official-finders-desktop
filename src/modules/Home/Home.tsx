@@ -40,7 +40,7 @@ export const Home = () => (
           <Icon type="arrow-right" />
         </Button>
       </Link>
-      <Link to={routes.HWRPAYROLL}>
+      <Link to={routes.HWRINVOICE}>
         <Button type="primary">
           HWR Invoice
           <Icon type="arrow-right" />
