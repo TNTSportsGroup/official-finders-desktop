@@ -78,7 +78,7 @@ export class Hwrp extends React.Component<any, IState> {
         key: "name"
       },
       {
-        title: "Amount",
+        title: "Receiver Amount",
         dataIndex: "amount",
         key: "amount"
       }
