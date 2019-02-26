@@ -122,7 +122,7 @@ export class Hwrp extends React.Component<any, IState> {
             multiple={false}
           >
             <Button type="primary" disabled={this.state.disabled}>
-              <Icon type="upload" /> Upload File
+              <Icon type="upload" /> Upload Payroll
             </Button>
           </Upload>
         </div>
