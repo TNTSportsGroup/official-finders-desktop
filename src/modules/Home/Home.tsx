@@ -2,13 +2,9 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 
 import { Button, Icon } from "antd";
-import styled from "styled-components";
-import { routes } from "../constants/routes";
 
-const Header = styled.h1`
-  color: white;
-  font-size: 45px;
-`;
+import { routes } from "../constants/routes";
+import { Header } from "../components/Header";
 
 export const Home = () => (
   <div
