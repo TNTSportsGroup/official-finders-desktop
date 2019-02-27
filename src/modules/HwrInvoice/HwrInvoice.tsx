@@ -80,6 +80,7 @@ export class HwrInvoice extends React.Component {
     return (
       <div
         style={{
+          display: "flex",
           height: "100%",
           width: "100%",
           justifyContent: "flex-start",
@@ -121,7 +122,7 @@ export class HwrInvoice extends React.Component {
           </Upload>
         </div>
 
-        <Layout hasSider={true} style={{ height: "110%" }}>
+        <Layout hasSider={true} style={{ height: "120%", flex: "1" }}>
           <Sider>
             <SiderMenu
               sportKeys={this.state.sportKeys}
