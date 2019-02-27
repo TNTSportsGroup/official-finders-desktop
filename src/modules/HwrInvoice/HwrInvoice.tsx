@@ -50,7 +50,7 @@ export class HwrInvoice extends React.Component {
             onChange={this.handleChange}
             name="file"
             accept="*"
-            action="http://localhost:3000/hwrp"
+            action="http://localhost:3000/hwri"
             multiple={false}
           >
             <Button type="primary" disabled={this.state.disabled}>
