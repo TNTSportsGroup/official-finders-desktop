@@ -2,10 +2,11 @@ import * as React from "react";
 import { Nav } from "../components/Nav";
 import { Link } from "react-router-dom";
 import { routes } from "../constants/routes";
-import { Icon, Upload, Button, Menu } from "antd";
+import { Icon, Upload, Button, Menu, Layout } from "antd";
 import console = require("console");
 
 const SubMenu = Menu.SubMenu;
+const { Sider, Content } = Layout;
 
 export class HwrInvoice extends React.Component {
   state = {
@@ -38,6 +39,7 @@ export class HwrInvoice extends React.Component {
         style={{
           height: "100%",
           width: "100%",
+          backgroundColor: "pink",
           justifyContent: "flex-start",
           flexDirection: "column"
         }}
@@ -57,7 +59,7 @@ export class HwrInvoice extends React.Component {
 
         <div
           style={{
-            padding: "5rem",
+            padding: "4rem",
             display: "flex",
             flexDirection: "row",
             justifyContent: "center",
@@ -76,7 +78,20 @@ export class HwrInvoice extends React.Component {
             </Button>
           </Upload>
         </div>
-        <div>
+
+        <Layout hasSider={true} style={{ height: "100%" }}>
+          <Sider>Sider</Sider>
+          <Content>Content</Content>
+        </Layout>
+
+        {/* <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            backgroundColor: "blue",
+            flex: 1
+          }}
+        >
           <Menu
             theme="dark"
             onClick={() => console.log("click")}
@@ -130,7 +145,7 @@ export class HwrInvoice extends React.Component {
               <Menu.Item key="12">Option 12</Menu.Item>
             </SubMenu>
           </Menu>
-        </div>
+        </div> */}
       </div>
     );
   }
