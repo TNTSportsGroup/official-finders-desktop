@@ -14,7 +14,7 @@ export class HwrInvoice extends React.Component {
     const { response } = info.file;
 
     if (response) {
-      const { data, totalNumberOfGames, keys } = response;
+      const { data, totalNumberOfGames, keys, folderName } = response;
     }
   };
 
