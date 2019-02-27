@@ -7,7 +7,12 @@ import console = require("console");
 
 export class HwrInvoice extends React.Component {
   state = {
-    disabled: false
+    disabled: false,
+    data: {},
+    keys: [],
+    folderToDownload: "",
+    totalNumberOfGames: 0,
+    dataToDisplay: []
   };
 
   handleChange = (info: any) => {
