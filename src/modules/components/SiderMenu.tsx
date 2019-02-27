@@ -28,7 +28,7 @@ export const SiderMenu = (props: IProps) => {
       theme="dark"
       //   onClick={({ key }) => console.log(key)}
       onSelect={({ key }) => props.handleSelect(key)}
-      style={{ width: 275, height: "110%" }}
+      style={{ width: 275, height: "100%" }}
       defaultOpenKeys={["sub1"]}
       selectedKeys={["0"]}
       mode="inline"
