@@ -10,23 +10,23 @@ interface IProps {
 
 export const SiderMenu = (props: IProps) => {
   const Sports = [
-    "Basketball",
     "Soccer",
     "Football",
     "Baseball",
     "Softball",
     "Floor Hockey",
     "Dodgeball",
-    "Score Keeper",
-    "Hall Monitor",
-    "Softball",
-    "Volleyball"
+    "Concessions",
+    "Scorekeepers",
+    "Hall Monitors",
+    "Volleyball",
+    "Basketball"
   ];
   return (
     <Menu
       theme="dark"
-      onClick={() => console.log("click")}
-      style={{ width: 256, height: "100%" }}
+      onClick={({ key }) => console.log(key)}
+      style={{ width: 275, height: "110%" }}
       defaultOpenKeys={["sub1"]}
       selectedKeys={["0"]}
       mode="inline"
@@ -34,7 +34,7 @@ export const SiderMenu = (props: IProps) => {
       {Sports.map((sport, index) => {
         return (
           <SubMenu
-            key={sport}
+            key={index}
             title={
               <span>
                 <span>{sport}</span>
@@ -43,7 +43,7 @@ export const SiderMenu = (props: IProps) => {
           >
             {props.sportKeys.map((key, index) => {
               if (key.includes(sport)) {
-                return <Menu.Item>{key}</Menu.Item>;
+                return <Menu.Item key={key}>{key}</Menu.Item>;
               }
             })}
           </SubMenu>
