@@ -5,6 +5,7 @@ import { Button, Icon } from "antd";
 
 import { routes } from "../constants/routes";
 import { Header } from "../components/Header";
+import { ButtonList } from "../components/ButtonList";
 
 export const Home = () => (
   <div
@@ -30,18 +31,20 @@ export const Home = () => (
       }}
     >
       <Header>Home</Header>
-      <Link to={routes.HWRPAYROLL}>
-        <Button type="primary">
-          HWR Payroll
-          <Icon type="arrow-right" />
-        </Button>
-      </Link>
-      <Link to={routes.HWRINVOICE}>
-        <Button type="primary">
-          HWR Invoice
-          <Icon type="arrow-right" />
-        </Button>
-      </Link>
+      <ButtonList>
+        <Link to={routes.HWRPAYROLL}>
+          <Button type="primary">
+            HWR Payroll
+            <Icon type="arrow-right" />
+          </Button>
+        </Link>
+        <Link to={routes.HWRINVOICE}>
+          <Button type="primary">
+            HWR Invoice
+            <Icon type="arrow-right" />
+          </Button>
+        </Link>
+      </ButtonList>
     </div>
   </div>
 );
