@@ -10,8 +10,12 @@ export class HwrInvoice extends React.Component {
     disabled: false
   };
 
-  handleChange = () => {
-    console.log("changed");
+  handleChange = (info: any) => {
+    const { response } = info.file;
+
+    if (response) {
+      const { data, totalNumberOfGames, keys } = response;
+    }
   };
 
   render() {
