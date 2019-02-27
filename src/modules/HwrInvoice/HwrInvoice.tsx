@@ -3,7 +3,6 @@ import { Nav } from "../components/Nav";
 import { Link } from "react-router-dom";
 import { routes } from "../constants/routes";
 import { Icon, Upload, Button } from "antd";
-import console = require("console");
 
 export class HwrInvoice extends React.Component {
   state = {
@@ -20,6 +19,13 @@ export class HwrInvoice extends React.Component {
 
     if (response) {
       const { data, totalNumberOfGames, keys, folderName } = response;
+
+      this.setState({
+        data,
+        keys,
+        totalNumberOfGames,
+        folderToDownload: folderName
+      });
     }
   };
 
