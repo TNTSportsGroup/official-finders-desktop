@@ -34,8 +34,6 @@ export class HwrInvoice extends React.Component {
   };
 
   handleSelect = (item: string) => {
-    console.log(this.state.data[item].games);
-
     this.setState({
       dataToDisplay: this.state.data[item].games
     });
@@ -130,7 +128,7 @@ export class HwrInvoice extends React.Component {
               handleSelect={this.handleSelect}
             />
           </Sider>
-          <Content>
+          <Content style={{ height: "110%" }}>
             <div style={{ padding: "6rem" }}>
               <Table
                 bordered={true}
