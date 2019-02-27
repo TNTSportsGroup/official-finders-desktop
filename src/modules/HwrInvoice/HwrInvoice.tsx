@@ -2,7 +2,7 @@ import * as React from "react";
 import { Nav } from "../components/Nav";
 import { Link } from "react-router-dom";
 import { routes } from "../constants/routes";
-import { Icon, Upload, Button, Menu, Layout } from "antd";
+import { Icon, Upload, Button, Menu, Layout, Table } from "antd";
 import console = require("console");
 import { SiderMenu } from "../components/SiderMenu";
 
@@ -33,7 +33,52 @@ export class HwrInvoice extends React.Component {
     }
   };
 
+  handleSelect = (item: string) => {
+    console.log(this.state.data[item].games);
+
+    this.setState({
+      dataToDisplay: this.state.data[item].games
+    });
+  };
+
   render() {
+    const columns = [
+      {
+        title: "ID",
+        dataIndex: "ID",
+        key: "ID"
+      },
+      {
+        title: "Game Date",
+        dataIndex: "Game Date",
+        key: "Game Date"
+      },
+      {
+        title: "Type",
+        dataIndex: "Type",
+        key: "Type"
+      },
+      {
+        title: "Home Team",
+        dataIndex: "Home Team",
+        key: "Home Team"
+      },
+      {
+        title: "Away Team",
+        dataIndex: "Away Team",
+        key: "Away Team"
+      },
+      {
+        title: "Facility",
+        dataIndex: "Facility",
+        key: "Facility"
+      },
+      {
+        title: "Total",
+        dataIndex: "Total",
+        key: "Total"
+      }
+    ];
     return (
       <div
         style={{
@@ -78,11 +123,22 @@ export class HwrInvoice extends React.Component {
           </Upload>
         </div>
 
-        <Layout hasSider={true} style={{ height: "100%" }}>
+        <Layout hasSider={true} style={{ height: "110%" }}>
           <Sider>
-            <SiderMenu sportKeys={this.state.sportKeys} />
+            <SiderMenu
+              sportKeys={this.state.sportKeys}
+              handleSelect={this.handleSelect}
+            />
           </Sider>
-          <Content>Content</Content>
+          <Content>
+            <div style={{ padding: "6rem" }}>
+              <Table
+                bordered={true}
+                dataSource={this.state.dataToDisplay}
+                columns={columns}
+              />
+            </div>
+          </Content>
         </Layout>
       </div>
     );
