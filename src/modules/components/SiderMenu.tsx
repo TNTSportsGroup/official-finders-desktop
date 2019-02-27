@@ -1,11 +1,12 @@
 import * as React from "react";
 import { Menu, Icon } from "antd";
+import console = require("console");
 
 const SubMenu = Menu.SubMenu;
 
 interface IProps {
   sportKeys: any[];
-  onSelect?: () => void;
+  handleSelect: (item: string) => void;
 }
 
 export const SiderMenu = (props: IProps) => {
@@ -25,7 +26,8 @@ export const SiderMenu = (props: IProps) => {
   return (
     <Menu
       theme="dark"
-      onClick={({ key }) => console.log(key)}
+      //   onClick={({ key }) => console.log(key)}
+      onSelect={({ key }) => props.handleSelect(key)}
       style={{ width: 275, height: "110%" }}
       defaultOpenKeys={["sub1"]}
       selectedKeys={["0"]}
