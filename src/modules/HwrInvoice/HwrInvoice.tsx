@@ -123,13 +123,13 @@ export class HwrInvoice extends React.Component {
         </div>
 
         <Layout hasSider={true} style={{ flex: 1 }}>
-          <Sider style={{ height: "100%" }}>
+          <Sider style={{ height: "110%" }}>
             <SiderMenu
               sportKeys={this.state.sportKeys}
               handleSelect={this.handleSelect}
             />
           </Sider>
-          <Content>
+          <Content style={{ height: "110%" }}>
             <div style={{ padding: "6rem" }}>
               <Table
                 bordered={true}
