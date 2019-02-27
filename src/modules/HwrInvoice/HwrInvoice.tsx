@@ -129,14 +129,26 @@ export class HwrInvoice extends React.Component {
               handleSelect={this.handleSelect}
             />
           </Sider>
-          <Content style={{ height: "110%" }}>
-            <div style={{ padding: "6rem" }}>
+          <Content style={{ height: "110%", padding: "6rem" }}>
+            <div>
               <Table
                 bordered={true}
                 dataSource={this.state.dataToDisplay}
                 columns={columns}
               />
             </div>
+            {this.state.folderToDownload && (
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  padding: 15
+                }}
+              >
+                <Button type="primary">Download All</Button>
+              </div>
+            )}
           </Content>
         </Layout>
       </div>
