@@ -175,6 +175,13 @@ export class HwrInvoice extends React.Component {
             />
           </Sider>
           <Content style={{ height: "110%", padding: "2rem" }}>
+            <div style={{ padding: "2rem", marginLeft: "2rem" }}>
+              <Table
+                bordered={true}
+                dataSource={this.state.dataToDisplay}
+                columns={columns}
+              />
+            </div>
             {this.state.completeTotal && (
               <div
                 style={{
@@ -189,13 +196,20 @@ export class HwrInvoice extends React.Component {
                 }`}</Header>
               </div>
             )}
-            <div style={{ padding: "2rem", marginLeft: "2rem" }}>
-              <Table
-                bordered={true}
-                dataSource={this.state.dataToDisplay}
-                columns={columns}
-              />
-            </div>
+            {this.state.totalNumberOfGames && (
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  alignItems: "center"
+                }}
+              >
+                <Header color={"black"}>{`Total Games: ${
+                  this.state.totalNumberOfGames
+                }`}</Header>
+              </div>
+            )}
             {this.state.folderToDownload && (
               <div
                 style={{
