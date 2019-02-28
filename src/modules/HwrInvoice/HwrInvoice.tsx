@@ -1,10 +1,18 @@
 import * as React from "react";
+import * as path from "path";
+import * as fs from "fs";
+import * as extract from "extract-zip";
 import { Nav } from "../components/Nav";
 import { Link } from "react-router-dom";
 import { routes } from "../constants/routes";
 import { Icon, Upload, Button, Menu, Layout, Table } from "antd";
+import * as unzipper from "unzipper";
 import console = require("console");
 import { SiderMenu } from "../components/SiderMenu";
+
+import { Header } from "../components/Header";
+import * as request from "request";
+import dayjs = require("dayjs");
 
 const { Sider, Content } = Layout;
 
@@ -15,20 +23,28 @@ export class HwrInvoice extends React.Component {
     sportKeys: [],
     folderToDownload: "",
     totalNumberOfGames: 0,
-    dataToDisplay: []
+    dataToDisplay: [],
+    completeTotal: ""
   };
 
   handleChange = (info: any) => {
     const { response } = info.file;
 
     if (response) {
-      const { data, totalNumberOfGames, keys, folderName } = response;
+      const {
+        data,
+        totalNumberOfGames,
+        keys,
+        folderName,
+        completeTotal
+      } = response;
 
       this.setState({
         data,
         sportKeys: keys,
         totalNumberOfGames,
-        folderToDownload: folderName
+        folderToDownload: folderName,
+        completeTotal
       });
     }
   };
@@ -36,6 +52,30 @@ export class HwrInvoice extends React.Component {
   handleSelect = (item: string) => {
     this.setState({
       dataToDisplay: this.state.data[item].games
+    });
+  };
+
+  downloadZip = async () => {
+    const { folderToDownload } = this.state;
+
+    const userDir = (process.env.HOME || process.env.PWD) as string;
+    const DOWNLOAD_DIR = path.join(userDir, "documents/");
+
+    const directory = await unzipper.Open.url(
+      request,
+      `http://localhost:3000/hwri/${folderToDownload}`
+    );
+    const formattedDate = dayjs().format("MMM:D-hh-mm");
+    const savedFolderName = `Invoices-${formattedDate}`;
+
+    const newFolder = path.join(DOWNLOAD_DIR, savedFolderName);
+
+    await fs.mkdirSync(newFolder);
+
+    directory.files.map(async file => {
+      const csvFile = fs.createWriteStream(path.resolve(newFolder, file.path));
+
+      csvFile.write(await file.buffer());
     });
   };
 
@@ -75,6 +115,11 @@ export class HwrInvoice extends React.Component {
         title: "Total",
         dataIndex: "Total",
         key: "Total"
+      },
+      {
+        title: "Current Total",
+        dataIndex: "Current Total",
+        key: "Current Total"
       }
     ];
     return (
@@ -129,8 +174,22 @@ export class HwrInvoice extends React.Component {
               handleSelect={this.handleSelect}
             />
           </Sider>
-          <Content style={{ height: "110%", padding: "6rem" }}>
-            <div>
+          <Content style={{ height: "110%", padding: "2rem" }}>
+            {this.state.completeTotal && (
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  alignItems: "center"
+                }}
+              >
+                <Header color={"black"}>{`Grand Total: $${
+                  this.state.completeTotal
+                }`}</Header>
+              </div>
+            )}
+            <div style={{ padding: "2rem", marginLeft: "2rem" }}>
               <Table
                 bordered={true}
                 dataSource={this.state.dataToDisplay}
@@ -146,7 +205,9 @@ export class HwrInvoice extends React.Component {
                   padding: 15
                 }}
               >
-                <Button type="primary">Download All</Button>
+                <Button type="primary" onClick={this.downloadZip}>
+                  Download All
+                </Button>
               </div>
             )}
           </Content>
