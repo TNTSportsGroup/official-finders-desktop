@@ -117,9 +117,9 @@ export class HwrInvoice extends React.Component {
         key: "Total"
       },
       {
-        title: "Current Total",
-        dataIndex: "Current Total",
-        key: "Current Total"
+        title: "Grand Total",
+        dataIndex: "Grand Total",
+        key: "Grand Total"
       }
     ];
     return (
