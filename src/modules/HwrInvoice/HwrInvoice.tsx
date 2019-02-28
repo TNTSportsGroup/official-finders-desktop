@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as path from "path";
 import * as fs from "fs";
-
+import * as child_process from "child_process";
 import { Nav } from "../components/Nav";
 import { Link } from "react-router-dom";
 import { routes } from "../constants/routes";
@@ -60,6 +60,15 @@ export class HwrInvoice extends React.Component {
 
     const userDir = (process.env.HOME || process.env.PWD) as string;
     const DOWNLOAD_DIR = path.join(userDir, "documents/");
+
+    // A script that will fetch the zip file and extract it to the Dekstop/demo folder.
+    // child_process.exec(
+    //   `curl http://localhost:3000/hwri/${folderToDownload} | tar -xf - -C ./Desktop/demo
+    // `,
+    //   {
+    //     cwd: userDir
+    //   }
+    // );
 
     const directory = await unzipper.Open.url(
       request,
