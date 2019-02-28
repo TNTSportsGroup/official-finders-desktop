@@ -191,9 +191,11 @@ export class HwrInvoice extends React.Component {
                   alignItems: "center"
                 }}
               >
-                <Header color={"black"}>{`Grand Total: $${
-                  this.state.completeTotal
-                }`}</Header>
+                <Header
+                  color={"black"}
+                  fontSize="3.5rem"
+                  fontWeight="1"
+                >{`Grand Total: $${this.state.completeTotal}`}</Header>
               </div>
             )}
             {this.state.totalNumberOfGames && (
