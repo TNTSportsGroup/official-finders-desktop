@@ -1,13 +1,13 @@
 import * as React from "react";
 import * as path from "path";
 import * as fs from "fs";
-import * as extract from "extract-zip";
+
 import { Nav } from "../components/Nav";
 import { Link } from "react-router-dom";
 import { routes } from "../constants/routes";
-import { Icon, Upload, Button, Menu, Layout, Table } from "antd";
+import { Icon, Upload, Button, Layout, Table } from "antd";
 import * as unzipper from "unzipper";
-import console = require("console");
+
 import { SiderMenu } from "../components/SiderMenu";
 
 import { Header } from "../components/Header";
