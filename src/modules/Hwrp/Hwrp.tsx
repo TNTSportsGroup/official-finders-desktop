@@ -53,7 +53,7 @@ export class Hwrp extends React.Component<any, IState> {
       if (response.status === 200) {
         const res = await response.text();
         const userDir = process.env.HOME || process.env.PWD;
-        const DOWNLOAD_DIR = path.join(userDir as string, "Downloads/");
+        const DOWNLOAD_DIR = path.join(userDir as string, "Documents/");
         const formattedDate = dayjs().format("MMM:D-hh-mm");
         const savedFileName = `Payroll-${formattedDate}.csv`;
 
