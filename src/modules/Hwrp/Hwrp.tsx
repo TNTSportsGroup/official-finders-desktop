@@ -1,12 +1,11 @@
-import * as React from "react";
-import * as fs from "fs";
+import { Alert, Button, Icon, Table, Upload } from "antd";
 import * as dayjs from "dayjs";
+import * as fs from "fs";
+import * as path from "path";
+import * as React from "react";
 import { Link } from "react-router-dom";
-import { Upload, Icon, Button, Table, Alert } from "antd";
-
 import { Nav } from "../components/Nav";
 import { routes } from "../constants/routes";
-import * as path from "path";
 
 interface IState {
   disabled: boolean;
@@ -54,7 +53,7 @@ export class Hwrp extends React.Component<any, IState> {
       if (response.status === 200) {
         const res = await response.text();
         const userDir = process.env.HOME || process.env.PWD;
-        const DOWNLOAD_DIR = path.join(userDir as string, "downloads/");
+        const DOWNLOAD_DIR = path.join(userDir as string, "Downloads/");
         const formattedDate = dayjs().format("MMM:D-hh-mm");
         const savedFileName = `Payroll-${formattedDate}.csv`;
 
