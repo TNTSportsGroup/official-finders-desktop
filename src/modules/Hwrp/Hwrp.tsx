@@ -152,7 +152,11 @@ export class Hwrp extends React.Component<any, IState> {
             </Button>
 
             {this.state.showSuccess && (
-              <Alert message="Download was a success" type="success" showIcon />
+              <Alert
+                message="Download was a success"
+                type="success"
+                showIcon={true}
+              />
             )}
           </div>
         )}
