@@ -59,33 +59,42 @@ export class HwrInvoice extends React.Component {
     const { folderToDownload } = this.state;
 
     const userDir = (process.env.HOME || process.env.PWD) as string;
-    const DOWNLOAD_DIR = path.join(userDir, "documents/");
-
-    // A script that will fetch the zip file and extract it to the Dekstop/demo folder.
-    // child_process.exec(
-    //   `curl http://localhost:3000/hwri/${folderToDownload} | tar -xf - -C ./Desktop/demo
-    // `,
-    //   {
-    //     cwd: userDir
-    //   }
-    // );
-
-    const directory = await unzipper.Open.url(
-      request,
-      `http://localhost:3000/hwri/${folderToDownload}`
-    );
+    const DOWNLOAD_DIR = path.resolve(userDir + "/Documents/");
     const formattedDate = dayjs().format("MMM:D-hh-mm");
-    const savedFolderName = `Invoices-${formattedDate}`;
+    const savedFolderName = `/Invoices-${formattedDate}`;
 
-    const newFolder = path.join(DOWNLOAD_DIR, savedFolderName);
+    fs.mkdir(path.resolve(DOWNLOAD_DIR + savedFolderName), e => {
+      if (e) {
+        console.log(e);
+        return;
+      }
 
-    await fs.mkdirSync(newFolder);
-
-    directory.files.map(async file => {
-      const csvFile = fs.createWriteStream(path.resolve(newFolder, file.path));
-
-      csvFile.write(await file.buffer());
+      // A script that will fetch the zip file and extract it to the Dekstop/demo folder.
+      child_process.exec(
+        `curl http://localhost:3000/hwri/${folderToDownload} | tar -xf - -C ./Documents/${savedFolderName}/
+    `,
+        {
+          cwd: userDir
+        }
+      );
     });
+
+    // const directory = await unzipper.Open.url(
+    //   request,
+    //   `http://localhost:3000/hwri/${folderToDownload}`
+    // );
+    // const formattedDate = dayjs().format("MMM:D-hh-mm");
+    // const savedFolderName = `Invoices-${formattedDate}`;
+
+    // const newFolder = path.join(DOWNLOAD_DIR, savedFolderName);
+
+    // await fs.mkdirSync(newFolder);
+
+    // directory.files.map(async file => {
+    //   const csvFile = fs.createWriteStream(path.resolve(newFolder, file.path));
+
+    //   csvFile.write(await file.buffer());
+    // });
   };
 
   render() {
