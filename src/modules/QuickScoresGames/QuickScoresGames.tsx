@@ -5,7 +5,7 @@ import { Button, Alert, Table } from "antd";
 import { BackToHome } from "../components/BackToHome";
 
 export const QuickScoresGames = () => {
-  const [error, setError] = React.useState("ff");
+  const [error, setError] = React.useState("");
   return (
     <div style={{ height: "100%", display: "flex", flexDirection: "column" }}>
       <Nav>
@@ -50,6 +50,21 @@ export const QuickScoresGames = () => {
             <Table
               bordered={true}
               columns={[{ title: "name" }, { title: "location" }]}
+            />
+          </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              flexDirection: "column",
+              alignItems: "center"
+            }}
+          >
+            <Button type="primary">Download</Button>
+            <Alert
+              message="Download was a success"
+              type="success"
+              showIcon={true}
             />
           </div>
         </div>
