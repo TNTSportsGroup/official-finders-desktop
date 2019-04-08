@@ -6,7 +6,6 @@ import { Nav } from "../components/Nav";
 import { Link } from "react-router-dom";
 import { routes } from "../constants/routes";
 import { Icon, Upload, Button, Layout, Table } from "antd";
-import * as unzipper from "unzipper";
 
 import { SiderMenu } from "../components/SiderMenu";
 
@@ -151,16 +150,7 @@ export class HwrInvoice extends React.Component {
         }}
       >
         <Nav>
-          <Link to={routes.HOME}>
-            <Icon
-              type="arrow-left"
-              style={{
-                color: "white",
-                marginLeft: ".5rem",
-                fontSize: "1.5rem"
-              }}
-            />
-          </Link>
+          <BackToHome />
         </Nav>
 
         <div
