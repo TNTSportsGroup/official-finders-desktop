@@ -12,6 +12,7 @@ import { SiderMenu } from "../components/SiderMenu";
 import { Header } from "../components/Header";
 import * as request from "request";
 import dayjs = require("dayjs");
+import { BackToHome } from "../components/BackToHome";
 
 const { Sider, Content } = Layout;
 
