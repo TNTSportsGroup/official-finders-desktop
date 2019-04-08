@@ -1,24 +1,15 @@
 import * as React from "react";
 import { Nav } from "../components/Nav";
-import { Link } from "react-router-dom";
-import { routes } from "../constants/routes";
-import { Icon, Button, Alert, Table } from "antd";
+
+import { Button, Alert, Table } from "antd";
+import { BackToHome } from "../components/BackToHome";
 
 export const QuickScoresGames = () => {
   const [error, setError] = React.useState("ff");
   return (
     <div style={{ height: "100%", display: "flex", flexDirection: "column" }}>
       <Nav>
-        <Link to={routes.HOME}>
-          <Icon
-            type="arrow-left"
-            style={{
-              color: "white",
-              marginLeft: ".5rem",
-              fontSize: "1.5rem"
-            }}
-          />
-        </Link>
+        <BackToHome />
       </Nav>
       <div
         style={{
