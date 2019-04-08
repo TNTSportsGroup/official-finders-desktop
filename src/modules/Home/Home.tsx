@@ -27,10 +27,12 @@ export const Home = () => (
         display: "flex",
         flexDirection: "column",
         justifyContent: "flex-start",
-        alignItems: "flex-start"
+        alignItems: "flex-start",
+
+        height: "35%"
       }}
     >
-      <Header>Home</Header>
+      <Header fontSize="3rem">Home</Header>
       <ButtonList>
         <Link to={routes.HWRPAYROLL}>
           <Button type="primary">
