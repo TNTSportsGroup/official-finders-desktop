@@ -29,7 +29,7 @@ export const Home = () => (
         justifyContent: "flex-start",
         alignItems: "flex-start",
 
-        height: "35%"
+        height: "40%"
       }}
     >
       <Header fontSize="3rem">Home</Header>
@@ -43,6 +43,12 @@ export const Home = () => (
         <Link to={routes.HWRINVOICE}>
           <Button type="primary">
             HWR Invoice
+            <Icon type="arrow-right" />
+          </Button>
+        </Link>
+        <Link to={routes.QUICKSCORESGAMES}>
+          <Button type="primary">
+            QuickScores Games
             <Icon type="arrow-right" />
           </Button>
         </Link>
