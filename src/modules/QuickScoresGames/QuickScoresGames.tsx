@@ -1,11 +1,22 @@
 import * as React from "react";
 import { Nav } from "../components/Nav";
 
-import { Button, Alert, Table } from "antd";
+import { Button, Alert, Table, Select } from "antd";
 import { BackToHome } from "../components/BackToHome";
+
+const handleGetGames = async (season: string) => {
+  const response = await fetch(`http://localhost:3000/qs?season=${season}`);
+
+  return response.body;
+};
+
+const Option = Select.Option;
 
 export const QuickScoresGames = () => {
   const [error, setError] = React.useState("");
+  const [season, setSeason] = React.useState("");
+  const [newGaes, setNewGames] = React.useState("");
+
   return (
     <div style={{ height: "100%", display: "flex", flexDirection: "column" }}>
       <Nav>
@@ -30,7 +41,22 @@ export const QuickScoresGames = () => {
             borderBottomWidth: "1px"
           }}
         >
-          <Button type="primary">Get Games</Button>
+          <Select
+            defaultValue="Spring 2019"
+            onChange={value => setSeason(value)}
+          >
+            <Option value="Spring 2019">Spring 2019</Option>
+          </Select>
+          <Button
+            type="primary"
+            onClick={async () => {
+              const games = await handleGetGames();
+              console.log(games);
+              setNewGames(games);
+            }}
+          >
+            Get Games
+          </Button>
           {error && (
             <Alert
               type="error"
