@@ -3,32 +3,33 @@ import { Nav } from "../components/Nav";
 
 import { Button, Alert, Table, Select } from "antd";
 import { BackToHome } from "../components/BackToHome";
+import console = require("console");
 
 const columns = [
   {
     title: "Game Date",
-    dataIndex: "name",
-    key: "name"
+    dataIndex: "Date",
+    key: "date"
   },
   {
     title: "Game Time",
-    dataIndex: "amount",
-    key: "amount"
+    dataIndex: "Time",
+    key: "time"
   },
   {
     title: "Home Team",
-    dataIndex: "amount",
-    key: "amount"
+    dataIndex: "HomeTeam",
+    key: "home"
   },
   {
-    title: "Away Yeam",
-    dataIndex: "amount",
-    key: "amount"
+    title: "Away Team",
+    dataIndex: "AwayTeam",
+    key: "away"
   },
   {
     title: "Facility",
-    dataIndex: "amount",
-    key: "amount"
+    dataIndex: "LocationName",
+    key: "facility"
   }
 ];
 
@@ -45,9 +46,10 @@ const Option = Select.Option;
 export const QuickScoresGames = () => {
   const [error, setError] = React.useState("");
   const [season, setSeason] = React.useState("Spring");
-  const [newGames, setNewGames] = React.useState("");
-  const [updatedGames, setUpdatesGames] = React.useState("");
+  const [newGames, setNewGames] = React.useState();
+  const [updatedGames, setUpdatedGames] = React.useState();
   const [year, setYear] = React.useState(2019);
+  const [loading, setLoading] = React.useState(false);
 
   return (
     <div
@@ -90,13 +92,20 @@ export const QuickScoresGames = () => {
           </div>
           <Button
             type="primary"
+            disabled={loading}
             onClick={async () => {
+              setLoading(true);
               const response = await handleGetGames(season, year);
 
               if (response.error) {
                 setError(response.error);
+                setLoading(false);
                 return;
               }
+              const { updatedGames, newGames } = response;
+              setUpdatedGames(updatedGames);
+              setNewGames(newGames);
+              setLoading(false);
             }}
           >
             Get Games
@@ -115,53 +124,69 @@ export const QuickScoresGames = () => {
           )}
         </div>
         <div style={{ flex: 11, display: "flex", flexDirection: "column" }}>
-          <div
-            style={{
-              padding: "3rem"
-            }}
-          >
-            <h1>New Games</h1>
-            <Table bordered={true} columns={columns} />
-          </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              flexDirection: "column",
-              alignItems: "center"
-            }}
-          >
-            <Button type="primary">Download</Button>
-            <Alert
-              message="Download was a success"
-              type="success"
-              showIcon={true}
-            />
-          </div>
+          {newGames && (
+            <>
+              <div
+                style={{
+                  padding: "3rem"
+                }}
+              >
+                <h1>New Games</h1>
+                <Table
+                  bordered={true}
+                  columns={columns}
+                  dataSource={newGames}
+                />
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  flexDirection: "column",
+                  alignItems: "center"
+                }}
+              >
+                <Button type="primary">Download</Button>
+                <Alert
+                  message="Download was a success"
+                  type="success"
+                  showIcon={true}
+                />
+              </div>
+            </>
+          )}
 
-          <div
-            style={{
-              padding: "3rem"
-            }}
-          >
-            <h1>Updated Games</h1>
-            <Table bordered={true} columns={columns} />
-          </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              flexDirection: "column",
-              alignItems: "center"
-            }}
-          >
-            <Button type="primary">Download</Button>
-            <Alert
-              message="Download was a success"
-              type="success"
-              showIcon={true}
-            />
-          </div>
+          {newGames && (
+            <>
+              <div
+                style={{
+                  padding: "3rem"
+                }}
+              >
+                <h1>Updated Games</h1>
+                <Table
+                  bordered={true}
+                  columns={columns}
+                  dataSource={updatedGames}
+                />
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    flexDirection: "column",
+                    alignItems: "center"
+                  }}
+                >
+                  <Button type="primary">Download</Button>
+                  <Alert
+                    message="Download was a success"
+                    type="success"
+                    showIcon={true}
+                  />
+                </div>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>
