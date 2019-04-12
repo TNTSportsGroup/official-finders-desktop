@@ -1,5 +1,8 @@
 import * as React from "react";
 import { Nav } from "../components/Nav";
+import * as path from "path";
+
+import * as child_process from "child_process";
 
 import { Button, Alert, Table, Select } from "antd";
 import { BackToHome } from "../components/BackToHome";
@@ -33,6 +36,35 @@ const columns = [
   }
 ];
 
+const handleDownload = async (fileName: string) => {
+  const userDir = process.env.HOME || process.env.PWD;
+  const DOWNLOAD_DIR = path.join(userDir as string, "Documents/");
+
+  child_process.exec(
+    `curl http://localhost:3000/qs/file/${fileName} > ${fileName}
+`,
+    {
+      cwd: DOWNLOAD_DIR
+    }
+  );
+  // const response = await fetch(`http://localhost:3000/qs/file/${fileName}`);
+
+  // if (response && response.body) {
+  //   if (response.status === 200) {
+  //     const res = await response.text();
+  //     const userDir = process.env.HOME || process.env.PWD;
+  //     const DOWNLOAD_DIR = path.join(userDir as string, "Documents/");
+
+  //     const savedFileName = `${fileName}`;
+
+  //     const myWritableStream = fs.createWriteStream(
+  //       DOWNLOAD_DIR + savedFileName
+  //     );
+  //     await myWritableStream.write(res);
+  //   }
+  // }
+};
+
 const handleGetGames = async (season: string, year: number) => {
   const response = await fetch(
     `http://localhost:3000/qs?season=${season}&year=${year}`
@@ -46,10 +78,12 @@ const Option = Select.Option;
 export const QuickScoresGames = () => {
   const [error, setError] = React.useState("");
   const [season, setSeason] = React.useState("Spring");
-  const [newGames, setNewGames] = React.useState();
-  const [updatedGames, setUpdatedGames] = React.useState();
+  const [newGames, setNewGames] = React.useState([]);
+  const [updatedGames, setUpdatedGames] = React.useState([]);
   const [year, setYear] = React.useState(2019);
   const [loading, setLoading] = React.useState(false);
+  const [newGamesFileName, setNewGamesFileName] = React.useState("");
+  const [updatedGamesFileName, setUpdatedGamesFileName] = React.useState("");
 
   return (
     <div
@@ -102,9 +136,16 @@ export const QuickScoresGames = () => {
                 setLoading(false);
                 return;
               }
-              const { updatedGames, newGames } = response;
+              const {
+                updatedGames,
+                newGames,
+                newGamesFileName,
+                updatedGamesFileName
+              } = response;
               setUpdatedGames(updatedGames);
               setNewGames(newGames);
+              setUpdatedGamesFileName(updatedGamesFileName);
+              setNewGamesFileName(newGamesFileName);
               setLoading(false);
             }}
           >
@@ -124,7 +165,7 @@ export const QuickScoresGames = () => {
           )}
         </div>
         <div style={{ flex: 11, display: "flex", flexDirection: "column" }}>
-          {newGames && (
+          {newGames.length > 0 && (
             <>
               <div
                 style={{
@@ -141,22 +182,29 @@ export const QuickScoresGames = () => {
               <div
                 style={{
                   display: "flex",
-                  justifyContent: "center",
-                  flexDirection: "column",
+                  justifyContent: "space-around",
+                  flexDirection: "row",
                   alignItems: "center"
                 }}
               >
-                <Button type="primary">Download</Button>
-                <Alert
+                <Button
+                  type="primary"
+                  onClick={() => {
+                    handleDownload(newGamesFileName);
+                  }}
+                >
+                  Download
+                </Button>
+                {/* <Alert
                   message="Download was a success"
                   type="success"
                   showIcon={true}
-                />
+                /> */}
               </div>
             </>
           )}
 
-          {newGames && (
+          {newGames.length > 0 && (
             <>
               <div
                 style={{
@@ -172,17 +220,24 @@ export const QuickScoresGames = () => {
                 <div
                   style={{
                     display: "flex",
-                    justifyContent: "center",
-                    flexDirection: "column",
+                    justifyContent: "space-around",
+                    flexDirection: "row",
                     alignItems: "center"
                   }}
                 >
-                  <Button type="primary">Download</Button>
-                  <Alert
+                  <Button
+                    type="primary"
+                    onClick={() => {
+                      handleDownload(updatedGamesFileName);
+                    }}
+                  >
+                    Download
+                  </Button>
+                  {/* <Alert
                     message="Download was a success"
                     type="success"
                     showIcon={true}
-                  />
+                  /> */}
                 </div>
               </div>
             </>
