@@ -6,6 +6,7 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import { Nav } from "../components/Nav";
 import { routes } from "../constants/routes";
+import { HOST } from "../constants/keys";
 
 interface IState {
   disabled: boolean;
@@ -47,7 +48,7 @@ export class Hwrp extends React.Component<any, IState> {
   handleDownloadClick = async () => {
     const { fileName } = this.state;
 
-    const response = await fetch(`http://localhost:3000/hwrp/${fileName}`);
+    const response = await fetch(`${HOST}/hwrp/${fileName}`);
 
     if (response && response.body) {
       if (response.status === 200) {
@@ -117,7 +118,7 @@ export class Hwrp extends React.Component<any, IState> {
             onChange={this.handleChange}
             name="file"
             accept="*"
-            action="http://localhost:3000/hwrp"
+            action={`${HOST}/hwrp`}
             multiple={false}
           >
             <Button type="primary" disabled={this.state.disabled}>

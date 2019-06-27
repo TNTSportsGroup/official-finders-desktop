@@ -118,7 +118,7 @@ export const QuickScoresGames = () => {
         >
           <div>
             <Select defaultValue={season} onChange={value => setSeason(value)}>
-              <Option value="Spring">Spring</Option>
+              <Option value="Spring">Summer</Option>
             </Select>
             <Select defaultValue={year} onChange={value => setYear(value)}>
               <Option value={2019}>2019</Option>
