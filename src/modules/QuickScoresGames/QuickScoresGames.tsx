@@ -77,7 +77,7 @@ const Option = Select.Option;
 
 export const QuickScoresGames = () => {
   const [error, setError] = React.useState("");
-  const [season, setSeason] = React.useState("Spring");
+  const [season, setSeason] = React.useState("Fall");
   const [newGames, setNewGames] = React.useState([]);
   const [updatedGames, setUpdatedGames] = React.useState([]);
   const [year, setYear] = React.useState(2019);
@@ -118,10 +118,12 @@ export const QuickScoresGames = () => {
         >
           <div>
             <Select defaultValue={season} onChange={value => setSeason(value)}>
+              <Option value="Fall">Fall</Option>
               <Option value="Spring">Summer</Option>
             </Select>
             <Select defaultValue={year} onChange={value => setYear(value)}>
               <Option value={2019}>2019</Option>
+              <Option value={2020}>2020</Option>
             </Select>
           </div>
           <Button
