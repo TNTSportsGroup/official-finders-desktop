@@ -13,6 +13,7 @@ import { Header } from "../components/Header";
 import * as request from "request";
 import dayjs = require("dayjs");
 import { BackToHome } from "../components/BackToHome";
+import { HOST } from "../constants/keys";
 
 const { Sider, Content } = Layout;
 
@@ -71,7 +72,7 @@ export class HwrInvoice extends React.Component {
 
       // A script that will fetch the zip file and extract it to the Dekstop/demo folder.
       child_process.exec(
-        `curl http://localhost:3000/hwri/${folderToDownload} | tar -xf - -C ./Documents/${savedFolderName}/
+        `curl ${HOST}/hwri/${folderToDownload} | tar -xf - -C ./Documents/${savedFolderName}/
     `,
         {
           cwd: userDir
@@ -167,7 +168,7 @@ export class HwrInvoice extends React.Component {
             onChange={this.handleChange}
             name="file"
             accept="*"
-            action="http://localhost:3000/hwri"
+            action={`${HOST}/hwri`}
             multiple={false}
           >
             <Button type="primary" disabled={this.state.disabled}>

@@ -1,7 +1,7 @@
 {
   "name": "official-finders-app",
   "productName": "Official Finders",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "My Electron application description",
   "main": "src/index.ts",
   "scripts": {

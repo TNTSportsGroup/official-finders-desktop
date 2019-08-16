@@ -4,9 +4,9 @@ import * as path from "path";
 
 import * as child_process from "child_process";
 
-import { Button, Alert, Table, Select } from "antd";
+import { Button, Alert, Table, Select, Spin } from "antd";
 import { BackToHome } from "../components/BackToHome";
-import console = require("console");
+import { HOST } from "../constants/keys";
 
 const columns = [
   {
@@ -33,6 +33,11 @@ const columns = [
     title: "Facility",
     dataIndex: "LocationName",
     key: "facility"
+  },
+  {
+    title: "Game Code",
+    dataIndex: "LeagueName",
+    key: "leagueName"
   }
 ];
 
@@ -41,7 +46,7 @@ const handleDownload = async (fileName: string) => {
   const DOWNLOAD_DIR = path.join(userDir as string, "Documents/");
 
   child_process.exec(
-    `curl http://localhost:3000/qs/file/${fileName} > ${fileName}
+    `curl ${HOST}/qs/file/${fileName} > ${fileName}
 `,
     {
       cwd: DOWNLOAD_DIR
@@ -66,9 +71,7 @@ const handleDownload = async (fileName: string) => {
 };
 
 const handleGetGames = async (season: string, year: number) => {
-  const response = await fetch(
-    `http://localhost:3000/qs?season=${season}&year=${year}`
-  );
+  const response = await fetch(`${HOST}/qs?season=${season}&year=${year}`);
 
   return response.json();
 };
@@ -84,6 +87,14 @@ export const QuickScoresGames = () => {
   const [loading, setLoading] = React.useState(false);
   const [newGamesFileName, setNewGamesFileName] = React.useState("");
   const [updatedGamesFileName, setUpdatedGamesFileName] = React.useState("");
+  const [
+    newGamesDownloadComplete,
+    setNewGamesDownloadComplete
+  ] = React.useState(false);
+  const [
+    updatedGamesDownloadComplete,
+    setUpdatedGamesDownloadComplete
+  ] = React.useState(false);
 
   return (
     <div
@@ -153,6 +164,7 @@ export const QuickScoresGames = () => {
           >
             Get Games
           </Button>
+          {loading && <Spin />}
           {error && (
             <Alert
               type="error"
@@ -191,17 +203,20 @@ export const QuickScoresGames = () => {
               >
                 <Button
                   type="primary"
-                  onClick={() => {
-                    handleDownload(newGamesFileName);
+                  onClick={async () => {
+                    await handleDownload(newGamesFileName);
+                    setNewGamesDownloadComplete(true);
                   }}
                 >
                   Download
                 </Button>
-                {/* <Alert
-                  message="Download was a success"
-                  type="success"
-                  showIcon={true}
-                /> */}
+                {newGamesDownloadComplete && (
+                  <Alert
+                    message="Download was a success"
+                    type="success"
+                    showIcon={true}
+                  />
+                )}
               </div>
             </>
           )}
@@ -227,19 +242,24 @@ export const QuickScoresGames = () => {
                     alignItems: "center"
                   }}
                 >
-                  <Button
-                    type="primary"
-                    onClick={() => {
-                      handleDownload(updatedGamesFileName);
-                    }}
-                  >
-                    Download
-                  </Button>
-                  {/* <Alert
-                    message="Download was a success"
-                    type="success"
-                    showIcon={true}
-                  /> */}
+                  {updatedGames.length > 0 && (
+                    <Button
+                      type="primary"
+                      onClick={async () => {
+                        await handleDownload(updatedGamesFileName);
+                        setUpdatedGamesDownloadComplete(true);
+                      }}
+                    >
+                      Download
+                    </Button>
+                  )}
+                  {updatedGamesDownloadComplete && (
+                    <Alert
+                      message="Download was a success"
+                      type="success"
+                      showIcon={true}
+                    />
+                  )}
                 </div>
               </div>
             </>
